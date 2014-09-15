@@ -9,7 +9,7 @@ requirejs([
     QUnit.start();
 
     QUnit.test('Toggler module', function (assert) {
-        var Toggler = new Toggler();
+        var toggler = new Toggler();
 
         assert.equal(toggler.getName(), 'Toggler', 'Module name is Toggler');
     });
