@@ -3,6 +3,7 @@
     "bower": "",
     "grunt": "",
     "grunt-contrib-jshint": "",
+    "grunt-contrib-less": "",
     "grunt-contrib-qunit": "",
     "grunt-contrib-watch": "",
     "grunt-jscs": "",

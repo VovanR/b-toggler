@@ -6,6 +6,11 @@ module.exports = (grunt) ->
     require('load-grunt-tasks')(grunt)
 
     grunt.initConfig
+        less:
+            all:
+                files:
+                    'static/css/style.css': 'static/css/style.less'
+
         jshint:
             all:
                 src: [

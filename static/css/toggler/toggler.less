@@ -1,0 +1,32 @@
+/*
+ * Toggler
+ *
+ * default - is closed
+ */
+
+.b-toggler {
+    .b-toggler__text {
+        cursor: pointer;
+
+        &._name_opened {
+            display: none;
+        }
+    }
+
+
+    /*
+     * Opened
+     */
+
+    &._state_opened {
+        .b-toggler__text {
+            &._name_opened {
+                display: inline;
+            }
+
+            &._name_closed {
+                display: none;
+            }
+        }
+    }
+}
