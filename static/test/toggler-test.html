@@ -5,7 +5,9 @@
         <title></title>
 
         <link rel="stylesheet" href="../vendor/qunit/qunit/qunit.css" media="screen">
+        <link rel="stylesheet" href="../css/build/style.css">
         <script src="../vendor/qunit/qunit/qunit.js"></script>
+        <script src="../vendor/requirejs/require.js"></script>
     </head>
     <body>
         <div id="qunit"></div>
@@ -23,7 +25,11 @@
         <script>
         // Defer Qunit so RequireJS can work its magic and resolve all modules.
         QUnit.config.autostart = false;
+
+        requirejs.config.baseUrl = '../js/';
+        requirejs(['../js/common'], function (common) {
+            requirejs(['../test/toggler-test']);
+        });
         </script>
-        <script data-main="toggler-test" src="../vendor/requirejs/require.js"></script>
     </body>
 </html>
