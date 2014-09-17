@@ -6,25 +6,54 @@ define([
 ], function (
 ) {
 
+    'use strict';
+
     var Toggler;
 
     /**
      * Toggler module
      *
+     * @param {Object} o Options
+     * @param {String} o.name
      * @constructor
      */
-    Toggler = function () {
-        this.name = 'Toggler';
+    Toggler = function (o) {
+        this._name = o.name;
+
+        this.bToggler = $('.b-toggler__toggler._name_' + this._name);
+        this.bPanel = $('.b-toggler__panel._name_' + this._name);
     };
 
     Toggler.prototype = {
         /**
-         * Returns module name
+         * Open toggler panel
          *
-         * @returns {String} name
+         * @private
          */
-        getName: function () {
-            return this.name;
+        _open: function () {
+            this.bToggler.addClass('_state_opened');
+            this.bPanel.addClass('_state_opened');
+        },
+
+        /**
+         * Close toggler panel
+         *
+         * @private
+         */
+        _close: function () {
+            this.bToggler.removeClass('_state_opened');
+            this.bPanel.removeClass('_state_opened');
+        },
+
+        /**
+         * Toggle toggler panel
+         */
+        toggle: function () {
+            if (this.bToggler.hasClass('_state_opened')) {
+                this._close();
+            } else {
+                this._open();
+            }
         },
     };
 

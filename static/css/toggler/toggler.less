@@ -5,12 +5,18 @@
  */
 
 .b-toggler {
-    .b-toggler__text {
-        cursor: pointer;
+    &.b-toggler__toggler {
+        .b-toggler__text {
+            cursor: pointer;
 
-        &._name_opened {
-            display: none;
+            &._name_opened {
+                display: none;
+            }
         }
+    }
+
+    &.b-toggler__panel {
+        display: none;
     }
 
 
@@ -19,14 +25,20 @@
      */
 
     &._state_opened {
-        .b-toggler__text {
-            &._name_opened {
-                display: inline;
-            }
+        &.b-toggler__toggler {
+            .b-toggler__text {
+                &._name_opened {
+                    display: inline;
+                }
 
-            &._name_closed {
-                display: none;
+                &._name_closed {
+                    display: none;
+                }
             }
+        }
+
+        &.b-toggler__panel {
+            display: block;
         }
     }
 }
