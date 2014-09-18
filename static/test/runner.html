@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Mocha</title>
+
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <link rel="stylesheet" href="../../node_modules/mocha/mocha.css">
+        <link rel="stylesheet" href="../css/build/style.css">
+    </head>
+    <body>
+        <div id="mocha"></div>
+
+        <div class="b-toggler _name_test b-toggler__toggler">
+            <span class="b-toggler__text _name_opened">Hide</span>
+            <span class="b-toggler__text _name_closed">Show</span>
+        </div>
+
+        <div class="b-toggler _name_test b-toggler__panel">
+            Toggled content
+        </div>
+
+
+        <script src="../vendor/requirejs/require.js"></script>
+        <script src="../../node_modules/should/should.js"></script>
+        <script src="../../node_modules/mocha/mocha.js"></script>
+        <script>mocha.setup('bdd')</script>
+
+        <script>
+        describe('true', function () {
+            it('should be true', function () {
+                true.should.equal(true);
+            });
+        });
+
+        describe('false', function () {
+            it('should be false', function () {
+                false.should.equal(false);
+            });
+        });
+
+        describe('viewport size', function () {
+            if (window._phantom) {
+                it('should be phantomjs default or testing value', function () {
+                    (window.innerWidth === 400 || window.innerWidth === 1).should.equal(true);
+                    (window.innerHeight === 300 || window.innerHeight === 1).should.equal(true);
+                });
+            } else {
+                it('should be valid', function () {
+                    (window.innerWidth >= 0).should.equal(true);
+                    (window.innerHeight >= 0).should.equal(true);
+                });
+            }
+        });
+        </script>
+        <script>
+        if (window.mochaPhantomJS) {
+            mochaPhantomJS.run();
+        } else {
+            mocha.run();
+        }
+        </script>
+        <script>
+        // Defer Qunit so RequireJS can work its magic and resolve all modules.
+        // QUnit.config.autostart = false;
+
+        // requirejs.config.baseUrl = '../js/';
+        // requirejs(['../js/common'], function (common) {
+        //     requirejs(['../test/toggler-test']);
+        // });
+        </script>
+    </body>
+</html>
