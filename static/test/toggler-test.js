@@ -37,8 +37,8 @@ requirejs([
             });
         });
 
-        describe('functional', function () {
-            it('`_open` should open panel and change toggler text to \'Hide\'', function () {
+        describe('#_open', function () {
+            it('should open panel and change toggler text to \'Hide\'', function () {
                 var m = new Toggler({
                     name: 'test',
                 });
@@ -47,8 +47,10 @@ requirejs([
                 expect(m.bToggler.find('.b-toggler__text._name_closed').is(':visible')).to.equal(false);
                 expect(m.bPanel.is(':visible')).to.equal(true);
             });
+        });
 
-            it('`_close` should close panel and change toggler text to \'Show\'', function () {
+        describe('#_close', function () {
+            it('should close panel and change toggler text to \'Show\'', function () {
                 var m = new Toggler({
                     name: 'test',
                 });
@@ -57,8 +59,10 @@ requirejs([
                 expect(m.bToggler.find('.b-toggler__text._name_closed').is(':visible')).to.equal(true);
                 expect(m.bPanel.is(':visible')).to.equal(false);
             });
+        });
 
-            it('`toggle` should toggle panel and toggler text', function () {
+        describe('#toggle', function () {
+            it('should toggle panel and toggler text', function () {
                 var m = new Toggler({
                     name: 'test',
                 });
