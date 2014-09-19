@@ -5,6 +5,7 @@
     "gulp-jscs": "",
     "gulp-jshint": "",
     "gulp-less": "",
+    "gulp-mocha-phantomjs": "",
     "gulp-notify": "",
     "jscs": "",
     "jscs-jsdoc": "",

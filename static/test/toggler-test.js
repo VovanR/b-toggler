@@ -1,73 +1,83 @@
 requirejs([
+    '../vendor/chai/chai',
     'jquery',
     '../js/modules/toggler',
 ], function (
+    chai,
     $,
     Toggler
 ) {
 
     'use strict';
 
-    QUnit.start();
+    mocha.setup('bdd');
+    var expect = chai.expect;
 
-    QUnit.module('Toggler module', {
-        setup: function () {
-            var bfix = $('#qunit-fixture');
-            this.m = new Toggler({
-                name: 'test',
+    describe('Toggler', function () {
+        describe('constructor', function () {
+            it('should initialize', function () {
+                var m = new Toggler({
+                    name: 'test',
+                });
+                expect(m).to.not.equal(undefined);
             });
-        },
-        teardown: function () {
-        }
+
+            it('should have toggler block', function () {
+                var m = new Toggler({
+                    name: 'test',
+                });
+                expect(m.bToggler[0]).to.not.equal(undefined);
+            });
+
+            it('should have panel block', function () {
+                var m = new Toggler({
+                    name: 'test',
+                });
+                expect(m.bPanel[0]).to.not.equal(undefined);
+            });
+        });
+
+        describe('functional', function () {
+            it('`_open` should open panel and change toggler text to \'Hide\'', function () {
+                var m = new Toggler({
+                    name: 'test',
+                });
+                m._open();
+                expect(m.bToggler.find('.b-toggler__text._name_opened').is(':visible')).to.equal(true);
+                expect(m.bToggler.find('.b-toggler__text._name_closed').is(':visible')).to.equal(false);
+                expect(m.bPanel.is(':visible')).to.equal(true);
+            });
+
+            it('`_close` should close panel and change toggler text to \'Show\'', function () {
+                var m = new Toggler({
+                    name: 'test',
+                });
+                m._close();
+                expect(m.bToggler.find('.b-toggler__text._name_opened').is(':visible')).to.equal(false);
+                expect(m.bToggler.find('.b-toggler__text._name_closed').is(':visible')).to.equal(true);
+                expect(m.bPanel.is(':visible')).to.equal(false);
+            });
+
+            it('`toggle` should toggle panel and toggler text', function () {
+                var m = new Toggler({
+                    name: 'test',
+                });
+                m.toggle();
+                expect(m.bToggler.find('.b-toggler__text._name_opened').is(':visible')).to.equal(true);
+                expect(m.bToggler.find('.b-toggler__text._name_closed').is(':visible')).to.equal(false);
+                expect(m.bPanel.is(':visible')).to.equal(true);
+                m.toggle();
+                expect(m.bToggler.find('.b-toggler__text._name_opened').is(':visible')).to.equal(false);
+                expect(m.bToggler.find('.b-toggler__text._name_closed').is(':visible')).to.equal(true);
+                expect(m.bPanel.is(':visible')).to.equal(false);
+            });
+        });
     });
 
-    QUnit.test('Should initialize', function (assert) {
-        var m = this.m;
-
-        assert.ok(m);
-    });
-
-    QUnit.test('Should have toggler block', function (assert) {
-        var m = this.m;
-
-        assert.ok(m.bToggler[0]);
-    });
-
-    QUnit.test('Should have panel block', function (assert) {
-        var m = this.m;
-
-        assert.ok(m.bPanel[0]);
-    });
-
-    QUnit.test('`_open` should open panel and change toggler text to \'Hide\'', function (assert) {
-        var m = this.m;
-
-        m._open();
-        assert.ok(m.bToggler.find('.b-toggler__text._name_opened').is(':visible'));
-        assert.ok(!m.bToggler.find('.b-toggler__text._name_closed').is(':visible'));
-        assert.ok(m.bPanel.is(':visible'));
-    });
-
-    QUnit.test('`_close` should close panel and change toggler text to \'Show\'', function (assert) {
-        var m = this.m;
-
-        m._close();
-        assert.ok(!m.bToggler.find('.b-toggler__text._name_opened').is(':visible'));
-        assert.ok(m.bToggler.find('.b-toggler__text._name_closed').is(':visible'));
-        assert.ok(!m.bPanel.is(':visible'));
-    });
-
-    QUnit.test('`toggle` should toggle panel and toggler text', function (assert) {
-        var m = this.m;
-
-        m.toggle();
-        assert.ok(m.bToggler.find('.b-toggler__text._name_opened').is(':visible'));
-        assert.ok(!m.bToggler.find('.b-toggler__text._name_closed').is(':visible'));
-        assert.ok(m.bPanel.is(':visible'));
-        m.toggle();
-        assert.ok(!m.bToggler.find('.b-toggler__text._name_opened').is(':visible'));
-        assert.ok(m.bToggler.find('.b-toggler__text._name_closed').is(':visible'));
-        assert.ok(!m.bPanel.is(':visible'));
-    });
+    if (window.mochaPhantomJS) {
+        mochaPhantomJS.run();
+    } else {
+        mocha.run();
+    }
 
 });
