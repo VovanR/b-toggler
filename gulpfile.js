@@ -38,7 +38,7 @@ gulp.task('less', function () {
 
 gulp.task('test', function () {
     return gulp
-        .src('./static/test/runner.html')
+        .src('./static/test/**/*-test.html')
         .pipe(mochaPhantomJS({ reporter: 'spec' }));
 });
 
