@@ -14,66 +14,84 @@ requirejs([
     var expect = chai.expect;
 
     describe('Toggler', function () {
+        var module = null;
+
+        beforeEach(function () {
+            module = new Toggler({
+                name: 'test',
+            });
+        });
+
+        afterEach(function () {
+            module = null;
+        });
+
+        var test = {
+            isActive: function (m) {
+                expect(m.bToggler.find('.b-toggler__text._name_opened').is(':visible')).to.equal(true);
+                expect(m.bToggler.find('.b-toggler__text._name_closed').is(':visible')).to.equal(false);
+                expect(m.bPanel.is(':visible')).to.equal(true);
+            },
+            isInactive: function (m) {
+                expect(m.bToggler.find('.b-toggler__text._name_opened').is(':visible')).to.equal(false);
+                expect(m.bToggler.find('.b-toggler__text._name_closed').is(':visible')).to.equal(true);
+                expect(m.bPanel.is(':visible')).to.equal(false);
+            },
+        };
+
         describe('constructor', function () {
             it('should initialize', function () {
-                var m = new Toggler({
-                    name: 'test',
-                });
+                var m = module;
                 expect(m).to.not.equal(undefined);
             });
 
             it('should have toggler block', function () {
-                var m = new Toggler({
-                    name: 'test',
-                });
+                var m = module;
                 expect(m.bToggler[0]).to.not.equal(undefined);
             });
 
             it('should have panel block', function () {
-                var m = new Toggler({
-                    name: 'test',
-                });
+                var m = module;
                 expect(m.bPanel[0]).to.not.equal(undefined);
             });
         });
 
         describe('#_open', function () {
             it('should open panel and change toggler text to \'Hide\'', function () {
-                var m = new Toggler({
-                    name: 'test',
-                });
+                var m = module;
                 m._open();
-                expect(m.bToggler.find('.b-toggler__text._name_opened').is(':visible')).to.equal(true);
-                expect(m.bToggler.find('.b-toggler__text._name_closed').is(':visible')).to.equal(false);
-                expect(m.bPanel.is(':visible')).to.equal(true);
+                test.isActive(m);
             });
         });
 
         describe('#_close', function () {
             it('should close panel and change toggler text to \'Show\'', function () {
-                var m = new Toggler({
-                    name: 'test',
-                });
+                var m = module;
                 m._close();
-                expect(m.bToggler.find('.b-toggler__text._name_opened').is(':visible')).to.equal(false);
-                expect(m.bToggler.find('.b-toggler__text._name_closed').is(':visible')).to.equal(true);
-                expect(m.bPanel.is(':visible')).to.equal(false);
+                test.isInactive(m);
             });
         });
 
         describe('#toggle', function () {
             it('should toggle panel and toggler text', function () {
-                var m = new Toggler({
-                    name: 'test',
+                var m = module;
+                m.toggle();
+                test.isActive(m);
+                m.toggle();
+                test.isInactive(m);
+            });
+        });
+
+        describe('ui', function () {
+            describe('click on toggler text', function () {
+                it('should toggle toggler', function () {
+                    var m = module;
+
+                    m.bToggler.trigger('click');
+                    test.isActive(m);
+                    m.bToggler.trigger('click');
+                    test.isInactive(m);
                 });
-                m.toggle();
-                expect(m.bToggler.find('.b-toggler__text._name_opened').is(':visible')).to.equal(true);
-                expect(m.bToggler.find('.b-toggler__text._name_closed').is(':visible')).to.equal(false);
-                expect(m.bPanel.is(':visible')).to.equal(true);
-                m.toggle();
-                expect(m.bToggler.find('.b-toggler__text._name_opened').is(':visible')).to.equal(false);
-                expect(m.bToggler.find('.b-toggler__text._name_closed').is(':visible')).to.equal(true);
-                expect(m.bPanel.is(':visible')).to.equal(false);
             });
         });
     });

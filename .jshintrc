@@ -26,6 +26,8 @@
     "mochaPhantomJS": true,
     "describe": true,
     "it": true,
+    "beforeEach": true,
+    "afterEach": true,
     "google": true,
     "L": true,
     "MQ": true,

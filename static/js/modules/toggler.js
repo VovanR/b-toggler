@@ -22,9 +22,22 @@ define([
 
         this.bToggler = $('.b-toggler__toggler._name_' + this._name);
         this.bPanel = $('.b-toggler__panel._name_' + this._name);
+
+        this._bindControls();
     };
 
     Toggler.prototype = {
+        /**
+         * Bindings
+         *
+         * @private
+         */
+        _bindControls: function () {
+            this.bToggler.on('click', function () {
+                this.toggle();
+            }.bind(this));
+        },
+
         /**
          * Open toggler panel
          *
