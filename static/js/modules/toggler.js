@@ -18,15 +18,30 @@ define([
      * @constructor
      */
     Toggler = function (o) {
+        if (!o) {
+            throw new Error('Missing options');
+        }
+
         this._name = o.name;
 
         this.bToggler = $('.b-toggler__toggler._name_' + this._name);
         this.bPanel = $('.b-toggler__panel._name_' + this._name);
 
-        this._bindControls();
+        this._initialize();
     };
 
     Toggler.prototype = {
+        /**
+         * Initialize
+         *
+         * @private
+         */
+        _initialize: function () {
+            console.info('Toggler init');
+
+            this._bindControls();
+        },
+
         /**
          * Bindings
          *

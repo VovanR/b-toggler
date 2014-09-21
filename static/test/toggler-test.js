@@ -14,16 +14,16 @@ requirejs([
     var expect = chai.expect;
 
     describe('Toggler', function () {
-        var module = null;
-
-        beforeEach(function () {
-            module = new Toggler({
+        var module = function () {
+            return new Toggler({
                 name: 'test',
             });
+        };
+
+        beforeEach(function () {
         });
 
         afterEach(function () {
-            module = null;
         });
 
         var test = {
@@ -41,24 +41,30 @@ requirejs([
 
         describe('constructor', function () {
             it('should initialize', function () {
-                var m = module;
+                var m = module();
                 expect(m).to.not.equal(undefined);
             });
 
             it('should have toggler block', function () {
-                var m = module;
+                var m = module();
                 expect(m.bToggler[0]).to.not.equal(undefined);
             });
 
             it('should have panel block', function () {
-                var m = module;
+                var m = module();
                 expect(m.bPanel[0]).to.not.equal(undefined);
+            });
+
+            it('should throw if no options', function () {
+                expect(function () {
+                    var m = new Toggler();
+                }).to.throw(Error);
             });
         });
 
         describe('#_open', function () {
             it('should open panel and change toggler text to \'Hide\'', function () {
-                var m = module;
+                var m = module();
                 m._open();
                 test.isActive(m);
             });
@@ -66,7 +72,7 @@ requirejs([
 
         describe('#_close', function () {
             it('should close panel and change toggler text to \'Show\'', function () {
-                var m = module;
+                var m = module();
                 m._close();
                 test.isInactive(m);
             });
@@ -74,7 +80,7 @@ requirejs([
 
         describe('#toggle', function () {
             it('should toggle panel and toggler text', function () {
-                var m = module;
+                var m = module();
                 m.toggle();
                 test.isActive(m);
                 m.toggle();
@@ -85,7 +91,7 @@ requirejs([
         describe('ui', function () {
             describe('click on toggler text', function () {
                 it('should toggle toggler', function () {
-                    var m = module;
+                    var m = module();
 
                     m.bToggler.trigger('click');
                     test.isActive(m);

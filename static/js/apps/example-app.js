@@ -25,7 +25,9 @@ define([
         _initialize: function () {
             console.info('App init');
 
-            this.Toggler = new Toggler();
+            this.Toggler = new Toggler({
+                name: 'test',
+            });
         },
     };
 
