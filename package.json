@@ -1,4 +1,14 @@
 {
+  "name": "b-toggler",
+  "version": "0.0.0",
+  "description": "Toggler for any content",
+  "homepage": "https://github.com/VovanR/b-toggler",
+  "license": "MIT",
+  "repository": "VovanR/b-toggler",
+  "author": {
+    "name": "VovanR",
+    "url": "http://vovanr.com/"
+  },
   "devDependencies": {
     "bower": "",
     "gulp": "",
