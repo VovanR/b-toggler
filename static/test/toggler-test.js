@@ -11,7 +11,7 @@ requirejs([
     'use strict';
 
     mocha.setup('bdd');
-    var expect = chai.expect;
+    var assert = chai.assert;
 
     describe('Toggler', function () {
         var module = function () {
@@ -28,37 +28,37 @@ requirejs([
 
         var test = {
             isActive: function (m) {
-                expect(m.bToggler.find('.b-toggler__text._name_opened').is(':visible')).to.equal(true);
-                expect(m.bToggler.find('.b-toggler__text._name_closed').is(':visible')).to.equal(false);
-                expect(m.bPanel.is(':visible')).to.equal(true);
+                assert.ok(m.bToggler.find('.b-toggler__text._name_opened').is(':visible'));
+                assert.notOk(m.bToggler.find('.b-toggler__text._name_closed').is(':visible'));
+                assert.ok(m.bPanel.is(':visible'));
             },
             isInactive: function (m) {
-                expect(m.bToggler.find('.b-toggler__text._name_opened').is(':visible')).to.equal(false);
-                expect(m.bToggler.find('.b-toggler__text._name_closed').is(':visible')).to.equal(true);
-                expect(m.bPanel.is(':visible')).to.equal(false);
+                assert.notOk(m.bToggler.find('.b-toggler__text._name_opened').is(':visible'));
+                assert.ok(m.bToggler.find('.b-toggler__text._name_closed').is(':visible'));
+                assert.notOk(m.bPanel.is(':visible'));
             },
         };
 
         describe('constructor', function () {
             it('should initialize', function () {
                 var m = module();
-                expect(m).to.not.equal(undefined);
+                assert.isDefined(m);
             });
 
             it('should have toggler block', function () {
                 var m = module();
-                expect(m.bToggler[0]).to.not.equal(undefined);
+                assert.isDefined(m.bToggler[0]);
             });
 
             it('should have panel block', function () {
                 var m = module();
-                expect(m.bPanel[0]).to.not.equal(undefined);
+                assert.isDefined(m.bPanel[0]);
             });
 
             it('should throw if no options', function () {
-                expect(function () {
+                assert.throw(function () {
                     var m = new Toggler();
-                }).to.throw(Error);
+                });
             });
         });
 
