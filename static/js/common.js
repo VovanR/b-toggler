@@ -1,5 +1,5 @@
 /**
- * @author VovanR [mail@vovanr.com]
+ * @author VovanR <mail@vovanr.com>
  */
 
 if (!requirejs.config.baseUrl) {
