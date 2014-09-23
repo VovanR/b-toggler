@@ -21,7 +21,6 @@
     "prompt": true,
     "require": true,
     "requirejs": true,
-    "QUnit": true,
     "mocha": true,
     "mochaPhantomJS": true,
     "describe": true,
@@ -32,8 +31,6 @@
     "L": true,
     "MQ": true,
     "videojs": true,
-    "soundManager": true,
-    "RichMarkerPanorama": true,
-    "RichMarkerPosition": true
+    "soundManager": true
   }
 }

@@ -12,6 +12,8 @@
   "devDependencies": {
     "bower": "",
     "gulp": "",
+    "gulp-autoprefixer": "",
+    "gulp-csso": "",
     "gulp-jscs": "",
     "gulp-jshint": "",
     "gulp-less": "",

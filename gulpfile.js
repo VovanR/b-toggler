@@ -6,6 +6,8 @@ var notify = require('gulp-notify');
 var jshint = require('gulp-jshint');
 var jscs = require('gulp-jscs');
 var less = require('gulp-less');
+var autoprefixer = require('gulp-autoprefixer');
+var csso = require('gulp-csso');
 var mochaPhantomJS = require('gulp-mocha-phantomjs');
 
 var changedFile = null;
@@ -33,6 +35,11 @@ gulp.task('lint', function () {
 gulp.task('less', function () {
     gulp.src('./static/css/style.less')
         .pipe(less())
+        .pipe(autoprefixer({
+            browsers: ['last 2 versions', 'ie 8'],
+            cascade: false,
+        }))
+        .pipe(csso())
         .pipe(gulp.dest('./static/css/build'));
 });
 
