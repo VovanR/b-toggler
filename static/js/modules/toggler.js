@@ -3,12 +3,15 @@
  */
 
 define([
+    'jquery',
 ], function (
+    $
 ) {
 
     'use strict';
 
     var Toggler;
+    var opennedClass = '_state_opened';
 
     /**
      * Toggler module
@@ -24,8 +27,8 @@ define([
 
         this._name = o.name;
 
-        this.bToggler = $('.b-toggler__toggler._name_' + this._name);
-        this.bPanel = $('.b-toggler__panel._name_' + this._name);
+        this._bToggler = null;
+        this._bPanel = null;
 
         this._initialize();
     };
@@ -39,6 +42,9 @@ define([
         _initialize: function () {
             console.info('Toggler init');
 
+            this._bToggler = $('.b-toggler__toggler._name_' + this._name);
+            this._bPanel = $('.b-toggler__panel._name_' + this._name);
+
             this._bindControls();
         },
 
@@ -48,7 +54,7 @@ define([
          * @private
          */
         _bindControls: function () {
-            this.bToggler.on('click', function () {
+            this._bToggler.on('click', function () {
                 this.toggle();
             }.bind(this));
         },
@@ -59,8 +65,8 @@ define([
          * @private
          */
         _open: function () {
-            this.bToggler.addClass('_state_opened');
-            this.bPanel.addClass('_state_opened');
+            this._bToggler.addClass(opennedClass);
+            this._bPanel.addClass(opennedClass);
         },
 
         /**
@@ -69,15 +75,15 @@ define([
          * @private
          */
         _close: function () {
-            this.bToggler.removeClass('_state_opened');
-            this.bPanel.removeClass('_state_opened');
+            this._bToggler.removeClass(opennedClass);
+            this._bPanel.removeClass(opennedClass);
         },
 
         /**
          * Toggle toggler panel
          */
         toggle: function () {
-            if (this.bToggler.hasClass('_state_opened')) {
+            if (this._bToggler.hasClass(opennedClass)) {
                 this._close();
             } else {
                 this._open();

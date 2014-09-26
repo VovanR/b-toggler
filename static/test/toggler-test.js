@@ -28,14 +28,14 @@ requirejs([
 
         var test = {
             isActive: function (m) {
-                assert.ok(m.bToggler.find('.b-toggler__text._name_opened').is(':visible'));
-                assert.notOk(m.bToggler.find('.b-toggler__text._name_closed').is(':visible'));
-                assert.ok(m.bPanel.is(':visible'));
+                assert.ok(m._bToggler.find('.b-toggler__text._name_opened').is(':visible'));
+                assert.notOk(m._bToggler.find('.b-toggler__text._name_closed').is(':visible'));
+                assert.ok(m._bPanel.is(':visible'));
             },
             isInactive: function (m) {
-                assert.notOk(m.bToggler.find('.b-toggler__text._name_opened').is(':visible'));
-                assert.ok(m.bToggler.find('.b-toggler__text._name_closed').is(':visible'));
-                assert.notOk(m.bPanel.is(':visible'));
+                assert.notOk(m._bToggler.find('.b-toggler__text._name_opened').is(':visible'));
+                assert.ok(m._bToggler.find('.b-toggler__text._name_closed').is(':visible'));
+                assert.notOk(m._bPanel.is(':visible'));
             },
         };
 
@@ -47,12 +47,12 @@ requirejs([
 
             it('should have toggler block', function () {
                 var m = module();
-                assert.isDefined(m.bToggler[0]);
+                assert.isDefined(m._bToggler[0]);
             });
 
             it('should have panel block', function () {
                 var m = module();
-                assert.isDefined(m.bPanel[0]);
+                assert.isDefined(m._bPanel[0]);
             });
 
             it('should throw if no options', function () {
@@ -93,9 +93,9 @@ requirejs([
                 it('should toggle toggler', function () {
                     var m = module();
 
-                    m.bToggler.trigger('click');
+                    m._bToggler.trigger('click');
                     test.isActive(m);
-                    m.bToggler.trigger('click');
+                    m._bToggler.trigger('click');
                     test.isInactive(m);
                 });
             });
