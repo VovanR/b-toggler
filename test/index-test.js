@@ -1,7 +1,7 @@
 requirejs([
     '../vendor/chai/chai',
     'jquery',
-    '../js/modules/toggler',
+    '../index',
 ], function (
     chai,
     $,

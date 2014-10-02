@@ -4,7 +4,7 @@
 
 define([
     'jquery',
-    '../modules/toggler',
+    '../../index',
 ], function (
     $,
     Toggler
