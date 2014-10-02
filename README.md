@@ -3,3 +3,5 @@ b-toggler
 =========
 
 Toggler for any content. RequireJS module.
+
+![Preview](preview.gif)
