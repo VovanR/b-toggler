@@ -93,6 +93,30 @@ requirejs([
             });
         });
 
+        describe('#open', function () {
+            it('should open panel', function () {
+                var m = module();
+                test.isInactive(m);
+                m.open();
+                test.isActive(m);
+                m.open();
+                test.isActive(m);
+            });
+        });
+
+        describe('#close', function () {
+            it('should close panel', function () {
+                var m = module();
+                test.isInactive(m);
+                m.open();
+                test.isActive(m);
+                m.close();
+                test.isInactive(m);
+                m.close();
+                test.isInactive(m);
+            });
+        });
+
         describe('ui', function () {
             describe('click on toggler text', function () {
                 it('should toggle toggler', function () {

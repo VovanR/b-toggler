@@ -89,6 +89,20 @@ define([
                 this._open();
             }
         },
+
+        /**
+         * Open toggler panel
+         */
+        open: function () {
+            this._open();
+        },
+
+        /**
+         * Close toggler panel
+         */
+        close: function () {
+            this._close();
+        },
     };
 
     return Toggler;
