@@ -14,6 +14,8 @@ requirejs([
     var assert = chai.assert;
 
     describe('Toggler', function () {
+        /**
+         */
         var module = function (o) {
             o = o || {};
             o.name = 'test';
@@ -32,11 +34,15 @@ requirejs([
         });
 
         var test = {
+            /**
+             */
             isActive: function (m) {
                 assert.ok(m._bToggler.find('.b-toggler__text._name_opened').is(':visible'));
                 assert.notOk(m._bToggler.find('.b-toggler__text._name_closed').is(':visible'));
                 assert.ok(m._bPanel.is(':visible'));
             },
+            /**
+             */
             isInactive: function (m) {
                 assert.notOk(m._bToggler.find('.b-toggler__text._name_opened').is(':visible'));
                 assert.ok(m._bToggler.find('.b-toggler__text._name_closed').is(':visible'));
@@ -201,6 +207,8 @@ requirejs([
                 it('should trigger open callback', function () {
                     var isFired = false;
                     var m = module({
+                        /**
+                         */
                         onOpen: function () {
                             isFired = true;
                         },
@@ -215,6 +223,8 @@ requirejs([
                 it('should trigger close callback', function () {
                     var isFired = false;
                     var m = module({
+                        /**
+                         */
                         onClose: function () {
                             isFired = true;
                         },
