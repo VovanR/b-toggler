@@ -14,10 +14,15 @@ requirejs([
     var assert = chai.assert;
 
     describe('Toggler', function () {
-        var module = function () {
-            return new Toggler({
+        var module = function (o) {
+            var ops = {
                 name: 'test',
-            });
+            };
+            if (o) {
+                ops.onOpen = o.onOpen || null;
+                ops.onClose = o.onClose || null;
+            }
+            return new Toggler(ops);
         };
 
         var _bFixtureTemplate = $('#fixture-template');
@@ -126,6 +131,36 @@ requirejs([
                     test.isActive(m);
                     m._bToggler.trigger('click');
                     test.isInactive(m);
+                });
+            });
+        });
+
+        describe('callbacks', function () {
+            describe('open', function () {
+                it('should trigger open callback', function () {
+                    var isFired = false;
+                    var m = module({
+                        onOpen: function () {
+                            isFired = true;
+                        },
+                    });
+                    assert.isFalse(isFired);
+                    m.open();
+                    assert.isTrue(isFired);
+                });
+            });
+
+            describe('close', function () {
+                it('should trigger close callback', function () {
+                    var isFired = false;
+                    var m = module({
+                        onClose: function () {
+                            isFired = true;
+                        },
+                    });
+                    assert.isFalse(isFired);
+                    m.close();
+                    assert.isTrue(isFired);
                 });
             });
         });

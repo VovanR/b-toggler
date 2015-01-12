@@ -18,6 +18,8 @@ define([
      *
      * @param {Object} o Options
      * @param {String} o.name
+     * @param {Function} o.onOpen
+     * @param {Function} o.onClose
      * @constructor
      */
     Toggler = function (o) {
@@ -26,6 +28,8 @@ define([
         }
 
         this._name = o.name;
+        this._onOpen = o.onOpen || function () {};
+        this._onClose = o.onClose || function () {};
 
         this._bToggler = null;
         this._bPanel = null;
@@ -67,6 +71,7 @@ define([
         _open: function () {
             this._bToggler.addClass(opennedClass);
             this._bPanel.addClass(opennedClass);
+            this._onOpen();
         },
 
         /**
@@ -77,6 +82,7 @@ define([
         _close: function () {
             this._bToggler.removeClass(opennedClass);
             this._bPanel.removeClass(opennedClass);
+            this._onClose();
         },
 
         /**
