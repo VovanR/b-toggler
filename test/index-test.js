@@ -15,14 +15,9 @@ requirejs([
 
     describe('Toggler', function () {
         var module = function (o) {
-            var ops = {
-                name: 'test',
-            };
-            if (o) {
-                ops.onOpen = o.onOpen || null;
-                ops.onClose = o.onClose || null;
-            }
-            return new Toggler(ops);
+            o = o || {};
+            o.name = 'test';
+            return new Toggler(o);
         };
 
         var _bFixtureTemplate = $('#fixture-template');
@@ -126,11 +121,77 @@ requirejs([
             describe('click on toggler text', function () {
                 it('should toggle toggler', function () {
                     var m = module();
-
                     m._bToggler.trigger('click');
                     test.isActive(m);
                     m._bToggler.trigger('click');
                     test.isInactive(m);
+                });
+            });
+
+            describe('close on blur', function () {
+                it('should be `false` on default', function () {
+                    var m = module();
+                    assert.isFalse(m._closeOnBlur);
+                });
+
+                describe('true', function () {
+                    it('should close panel on blur', function () {
+                        var m = module({
+                            closeOnBlur: true,
+                        });
+                        m.open();
+                        assert.notEqual(m._bPanel.css('display'), 'none');
+                        $(document.body).trigger('click');
+                        assert.equal(m._bPanel.css('display'), 'none');
+                    });
+
+                    it('should not close panel on panel block', function () {
+                        var m = module({
+                            closeOnBlur: true,
+                        });
+                        m.open();
+                        m._bPanel.trigger('click');
+                        assert.notEqual(m._bPanel.css('display'), 'none');
+                    });
+
+                    it('should not close panel on panel children blocks', function () {
+                        var m = module({
+                            closeOnBlur: true,
+                        });
+                        m.open();
+                        m._bPanel.children().first().trigger('click');
+                        assert.notEqual(m._bPanel.css('display'), 'none');
+                    });
+
+                    it('should not close on toggler block', function () {
+                        var m = module({
+                            closeOnBlur: true,
+                        });
+                        m.open();
+                        assert.notEqual(m._bPanel.css('display'), 'none');
+                        m._bToggler.trigger('click');
+                        assert.equal(m._bPanel.css('display'), 'none');
+                    });
+
+                    it('should not close on toggler children blocks', function () {
+                        var m = module({
+                            closeOnBlur: true,
+                        });
+                        assert.equal(m._bPanel.css('display'), 'none');
+                        var child = m._bToggler.children().first();
+                        child.trigger('click');
+                        assert.notEqual(m._bPanel.css('display'), 'none');
+                    });
+                });
+
+                describe('false', function () {
+                    it('should not close panel on blur', function () {
+                        var m = module();
+                        m.open();
+                        assert.notEqual(m._bPanel.css('display'), 'none');
+                        $(document.body).trigger('click');
+                        assert.notEqual(m._bPanel.css('display'), 'none');
+                    });
                 });
             });
         });

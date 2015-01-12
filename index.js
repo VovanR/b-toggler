@@ -18,8 +18,9 @@ define([
      *
      * @param {Object} o Options
      * @param {String} o.name
-     * @param {Function} o.onOpen
-     * @param {Function} o.onClose
+     * @param {Function} [o.onOpen]
+     * @param {Function} [o.onClose]
+     * @param {Boolean} [o.closeOnBlur=false]
      * @constructor
      */
     Toggler = function (o) {
@@ -30,6 +31,7 @@ define([
         this._name = o.name;
         this._onOpen = o.onOpen || function () {};
         this._onClose = o.onClose || function () {};
+        this._closeOnBlur = o.closeOnBlur || false;
 
         this._bToggler = null;
         this._bPanel = null;
@@ -58,9 +60,16 @@ define([
          * @private
          */
         _bindControls: function () {
-            this._bToggler.on('click', function () {
+            this._bToggler.on('click', function (e) {
+                e.preventDefault();
                 this.toggle();
             }.bind(this));
+
+            if (this._closeOnBlur) {
+                this._bPanel.on('click', function (e) {
+                    e.preventDefault();
+                });
+            }
         },
 
         /**
@@ -71,6 +80,17 @@ define([
         _open: function () {
             this._bToggler.addClass(opennedClass);
             this._bPanel.addClass(opennedClass);
+
+            if (this._closeOnBlur) {
+                $(document).on('click.dj-feedback', function (e) {
+                    if (e.isDefaultPrevented()) {
+                        return;
+                    }
+
+                    this.close();
+                }.bind(this));
+            }
+
             this._onOpen();
         },
 
@@ -82,6 +102,11 @@ define([
         _close: function () {
             this._bToggler.removeClass(opennedClass);
             this._bPanel.removeClass(opennedClass);
+
+            if (this._closeOnBlur) {
+                $(document).off('click.dj-feedback');
+            }
+
             this._onClose();
         },
 
