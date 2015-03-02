@@ -188,6 +188,19 @@ requirejs([
                         child.trigger('click');
                         assert.notEqual(m._bPanel.css('display'), 'none');
                     });
+
+                    it('should not prevent inside links', function () {
+                        var $link = $('#fixtures').find('a');
+                        var m = module({
+                            closeOnBlur: true,
+                        });
+                        var ee;
+                        $link.on('click', function (e) {
+                            ee = e;
+                        });
+                        $link.trigger('click');
+                        assert.isFalse(ee.isDefaultPrevented());
+                    });
                 });
 
                 describe('false', function () {

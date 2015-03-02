@@ -64,12 +64,6 @@ define([
                 e.preventDefault();
                 this.toggle();
             }.bind(this));
-
-            if (this._closeOnBlur) {
-                this._bPanel.on('click', function (e) {
-                    e.preventDefault();
-                });
-            }
         },
 
         /**
@@ -83,11 +77,9 @@ define([
 
             if (this._closeOnBlur) {
                 $(document).on('click.dj-feedback', function (e) {
-                    if (e.isDefaultPrevented()) {
-                        return;
+                    if (!$(e.target).closest('.b-toggler').length) {
+                        this.close();
                     }
-
-                    this.close();
                 }.bind(this));
             }
 
