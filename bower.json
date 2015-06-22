@@ -11,19 +11,12 @@
   "dependencies": {
     "jquery": "~2.1.1"
   },
-  "devDependencies": {
-    "chai": "~1.9.1",
-    "mocha": "~1.21.4",
-    "requirejs": "~2.1.14"
-  },
   "ignore": [
     "package.json",
     "node_modules",
-    "vendor",
     "**/.*",
     "test",
-    "example",
-    "gulpfile.js"
+    "example"
   ],
   "private": true
 }
