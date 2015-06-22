@@ -4,7 +4,7 @@
 [![Dependency Status][depstat-image]][depstat-url]
 [![DevDependency Status][depstat-dev-image]][depstat-dev-url]
 
-> Toggler for any content. RequireJS module
+> Toggler for any content. RequireJS module ([Demo](https://jsfiddle.net/VovanR/39qee4ax/))
 
 ## Usage
 
