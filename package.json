@@ -14,7 +14,8 @@
     "lint": "npm run jslint; npm run jscs",
     "jslint": "jshint --reporter ./node_modules/jshint-stylish ./index.js ./test/*.js",
     "jscs": "jscs ./index.js ./test/*.js",
-    "build:css": "postcss --use postcss-import --use postcss-nested -o ./css/build.css ./css/style.css"
+    "build:css": "postcss --use postcss-import --use postcss-nested -o ./css/build.css ./css/style.css",
+    "postinstall": "npm run build:css"
   },
   "devDependencies": {
     "chai": "^3.0.0",
