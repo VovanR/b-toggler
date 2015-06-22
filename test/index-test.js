@@ -1,10 +1,14 @@
 requirejs([
-    '../vendor/chai/chai',
     'jquery',
+    'chai',
+    'sinon',
+    'lodash',
     '../index',
 ], function (
-    chai,
     $,
+    chai,
+    sinon,
+    _,
     Toggler
 ) {
 
@@ -22,9 +26,9 @@ requirejs([
             return new Toggler(o);
         };
 
-        var _bFixtureTemplate = $('#fixture-template');
-        var _fixtureTemplate = _bFixtureTemplate.html();
-        _bFixtureTemplate.empty();
+        var _$fixtureTemplate = $('#fixture-template');
+        var _fixtureTemplate = _$fixtureTemplate.html();
+        _$fixtureTemplate.empty();
 
         beforeEach(function () {
             $('#fixtures').html(_fixtureTemplate);
@@ -37,16 +41,16 @@ requirejs([
             /**
              */
             isActive: function (m) {
-                assert.ok(m._bToggler.find('.b-toggler__text._name_opened').is(':visible'));
-                assert.notOk(m._bToggler.find('.b-toggler__text._name_closed').is(':visible'));
-                assert.ok(m._bPanel.is(':visible'));
+                assert.ok(m._$toggler.find('.b-toggler__text._name_opened').is(':visible'));
+                assert.notOk(m._$toggler.find('.b-toggler__text._name_closed').is(':visible'));
+                assert.ok(m._$panel.is(':visible'));
             },
             /**
              */
             isInactive: function (m) {
-                assert.notOk(m._bToggler.find('.b-toggler__text._name_opened').is(':visible'));
-                assert.ok(m._bToggler.find('.b-toggler__text._name_closed').is(':visible'));
-                assert.notOk(m._bPanel.is(':visible'));
+                assert.notOk(m._$toggler.find('.b-toggler__text._name_opened').is(':visible'));
+                assert.ok(m._$toggler.find('.b-toggler__text._name_closed').is(':visible'));
+                assert.notOk(m._$panel.is(':visible'));
             },
         };
 
@@ -58,12 +62,12 @@ requirejs([
 
             it('should have toggler block', function () {
                 var m = module();
-                assert.isDefined(m._bToggler[0]);
+                assert.ok(m._$toggler.length);
             });
 
             it('should have panel block', function () {
                 var m = module();
-                assert.isDefined(m._bPanel[0]);
+                assert.ok(m._$panel.length);
             });
 
             it('should throw if no options', function () {
@@ -73,7 +77,7 @@ requirejs([
             });
         });
 
-        describe('#_open', function () {
+        describe('_open', function () {
             it('should open panel and change toggler text to \'Hide\'', function () {
                 var m = module();
                 m._open();
@@ -81,7 +85,7 @@ requirejs([
             });
         });
 
-        describe('#_close', function () {
+        describe('_close', function () {
             it('should close panel and change toggler text to \'Show\'', function () {
                 var m = module();
                 m._close();
@@ -127,9 +131,9 @@ requirejs([
             describe('click on toggler text', function () {
                 it('should toggle toggler', function () {
                     var m = module();
-                    m._bToggler.trigger('click');
+                    m._$toggler.trigger('click');
                     test.isActive(m);
-                    m._bToggler.trigger('click');
+                    m._$toggler.trigger('click');
                     test.isInactive(m);
                 });
             });
@@ -146,9 +150,9 @@ requirejs([
                             closeOnBlur: true,
                         });
                         m.open();
-                        assert.notEqual(m._bPanel.css('display'), 'none');
+                        assert.notEqual(m._$panel.css('display'), 'none');
                         $(document.body).trigger('click');
-                        assert.equal(m._bPanel.css('display'), 'none');
+                        assert.equal(m._$panel.css('display'), 'none');
                     });
 
                     it('should not close panel on panel block', function () {
@@ -156,8 +160,8 @@ requirejs([
                             closeOnBlur: true,
                         });
                         m.open();
-                        m._bPanel.trigger('click');
-                        assert.notEqual(m._bPanel.css('display'), 'none');
+                        m._$panel.trigger('click');
+                        assert.notEqual(m._$panel.css('display'), 'none');
                     });
 
                     it('should not close panel on panel children blocks', function () {
@@ -165,8 +169,8 @@ requirejs([
                             closeOnBlur: true,
                         });
                         m.open();
-                        m._bPanel.children().first().trigger('click');
-                        assert.notEqual(m._bPanel.css('display'), 'none');
+                        m._$panel.children().first().trigger('click');
+                        assert.notEqual(m._$panel.css('display'), 'none');
                     });
 
                     it('should not close on toggler block', function () {
@@ -174,19 +178,19 @@ requirejs([
                             closeOnBlur: true,
                         });
                         m.open();
-                        assert.notEqual(m._bPanel.css('display'), 'none');
-                        m._bToggler.trigger('click');
-                        assert.equal(m._bPanel.css('display'), 'none');
+                        assert.notEqual(m._$panel.css('display'), 'none');
+                        m._$toggler.trigger('click');
+                        assert.equal(m._$panel.css('display'), 'none');
                     });
 
                     it('should not close on toggler children blocks', function () {
                         var m = module({
                             closeOnBlur: true,
                         });
-                        assert.equal(m._bPanel.css('display'), 'none');
-                        var child = m._bToggler.children().first();
+                        assert.equal(m._$panel.css('display'), 'none');
+                        var child = m._$toggler.children().first();
                         child.trigger('click');
-                        assert.notEqual(m._bPanel.css('display'), 'none');
+                        assert.notEqual(m._$panel.css('display'), 'none');
                     });
 
                     it('should not prevent inside links', function () {
@@ -207,9 +211,9 @@ requirejs([
                     it('should not close panel on blur', function () {
                         var m = module();
                         m.open();
-                        assert.notEqual(m._bPanel.css('display'), 'none');
+                        assert.notEqual(m._$panel.css('display'), 'none');
                         $(document.body).trigger('click');
-                        assert.notEqual(m._bPanel.css('display'), 'none');
+                        assert.notEqual(m._$panel.css('display'), 'none');
                     });
                 });
             });

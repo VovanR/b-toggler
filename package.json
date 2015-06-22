@@ -1,28 +1,43 @@
 {
   "name": "b-toggler",
-  "version": "0.1.1",
   "description": "Toggler for any content",
-  "homepage": "https://github.com/VovanR/b-toggler",
-  "license": "MIT",
-  "repository": "VovanR/b-toggler",
-  "author": {
-    "name": "VovanR",
-    "url": "http://vovanr.com/"
-  },
-  "devDependencies": {
-    "bower": "",
-    "gulp": "",
-    "gulp-autoprefixer": "",
-    "gulp-csso": "",
-    "gulp-jscs": "",
-    "gulp-jshint": "",
-    "gulp-less": "",
-    "gulp-mocha-phantomjs": "",
-    "jscs": "",
-    "jscs-jsdoc": "",
-    "jshint-stylish": ""
+  "version": "0.1.1",
+  "author": "Vladimir Rodkin <mail@vovanr.com>",
+  "repository": {
+    "type": "git",
+    "url": "https://github.comVovanR/b-toggler"
   },
   "scripts": {
-    "postinstall": "./node_modules/.bin/bower install; ./node_modules/.bin/gulp less"
-  }
+    "prepush": "npm test; npm run lint",
+    "precommit": "npm test; npm run lint",
+    "test": "mocha-phantomjs -R spec ./test/index-test.html",
+    "lint": "npm run jslint; npm run jscs",
+    "jslint": "jshint --reporter ./node_modules/jshint-stylish ./index.js ./test/*.js",
+    "jscs": "jscs ./index.js ./test/*.js",
+    "build:css": "postcss --use postcss-import --use postcss-nested -o ./css/build.css ./css/style.css"
+  },
+  "devDependencies": {
+    "chai": "^3.0.0",
+    "husky": "^0.8.1",
+    "jquery": "^2.1.4",
+    "jscs": "^1.13.1",
+    "jscs-jsdoc": "^1.0.1",
+    "jshint": "^2.8.0",
+    "jshint-stylish": "^2.0.0",
+    "lodash": "^3.9.3",
+    "mocha": "^2.2.5",
+    "mocha-phantomjs": "^3.5.3",
+    "phantomjs": "^1.9.17",
+    "postcss": "^4.1.12",
+    "postcss-cli": "^1.3.1",
+    "postcss-import": "^6.0.0",
+    "postcss-nested": "^0.3.2",
+    "requirejs": "^2.1.18",
+    "sinon": "^1.14.1"
+  },
+  "bugs": {
+    "url": "https://github.com/VovanR/b-toggler/issues"
+  },
+  "homepage": "https://github.com/VovanR/b-toggler",
+  "license": "MIT"
 }

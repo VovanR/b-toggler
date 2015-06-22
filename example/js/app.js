@@ -1,14 +1,16 @@
 /**
- * @author VovanR <mail@vovanr.com>
+ * @author Vladimir Rodkin <mail@vovanr.com>
  */
 
 define([
     'jquery',
-    '../../index',
+    'toggler',
 ], function (
     $,
     Toggler
 ) {
+
+    'use strict';
 
     var App;
 
@@ -25,12 +27,12 @@ define([
         _initialize: function () {
             console.info('App init');
 
-            this.Toggler = new Toggler({
+            this._toggler = new Toggler({
                 name: 'test',
             });
         },
     };
 
-    return App;
+    return new App();
 
 });

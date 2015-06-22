@@ -1,5 +1,8 @@
 /**
- * @author VovanR <mail@vovanr.com>
+ * Toggler for any content
+ *
+ * @module Toggler
+ * @author Vladimir Rodkin <mail@vovanr.com>
  */
 
 define([
@@ -14,14 +17,13 @@ define([
     var opennedClass = '_state_opened';
 
     /**
-     * Toggler module
-     *
      * @param {Object} o Options
      * @param {String} o.name
      * @param {Function} [o.onOpen]
      * @param {Function} [o.onClose]
      * @param {Boolean} [o.closeOnBlur=false]
      * @constructor
+     * @alias module:Toggler
      */
     Toggler = function (o) {
         if (!o) {
@@ -33,10 +35,10 @@ define([
         this._onClose = o.onClose || function () {};
         this._closeOnBlur = o.closeOnBlur || false;
 
-        this._bToggler = null;
-        this._bPanel = null;
+        this._$toggler = null;
+        this._$panel = null;
 
-        this._initialize();
+        this._init();
     };
 
     Toggler.prototype = {
@@ -45,11 +47,11 @@ define([
          *
          * @private
          */
-        _initialize: function () {
+        _init: function () {
             console.info('Toggler init');
 
-            this._bToggler = $('.b-toggler__toggler._name_' + this._name);
-            this._bPanel = $('.b-toggler__panel._name_' + this._name);
+            this._$toggler = $('.b-toggler__toggler._name_' + this._name);
+            this._$panel = $('.b-toggler__panel._name_' + this._name);
 
             this._bindControls();
         },
@@ -60,7 +62,7 @@ define([
          * @private
          */
         _bindControls: function () {
-            this._bToggler.on('click', function (e) {
+            this._$toggler.on('click', function (e) {
                 e.preventDefault();
                 this.toggle();
             }.bind(this));
@@ -72,8 +74,8 @@ define([
          * @private
          */
         _open: function () {
-            this._bToggler.addClass(opennedClass);
-            this._bPanel.addClass(opennedClass);
+            this._$toggler.addClass(opennedClass);
+            this._$panel.addClass(opennedClass);
 
             if (this._closeOnBlur) {
                 $(document).on('click.dj-feedback', function (e) {
@@ -92,8 +94,8 @@ define([
          * @private
          */
         _close: function () {
-            this._bToggler.removeClass(opennedClass);
-            this._bPanel.removeClass(opennedClass);
+            this._$toggler.removeClass(opennedClass);
+            this._$panel.removeClass(opennedClass);
 
             if (this._closeOnBlur) {
                 $(document).off('click.dj-feedback');
@@ -104,9 +106,11 @@ define([
 
         /**
          * Toggle toggler panel
+         *
+         * @public
          */
         toggle: function () {
-            if (this._bToggler.hasClass(opennedClass)) {
+            if (this._$toggler.hasClass(opennedClass)) {
                 this._close();
             } else {
                 this._open();
@@ -115,6 +119,8 @@ define([
 
         /**
          * Open toggler panel
+         *
+         * @public
          */
         open: function () {
             this._open();
@@ -122,6 +128,8 @@ define([
 
         /**
          * Close toggler panel
+         *
+         * @public
          */
         close: function () {
             this._close();
