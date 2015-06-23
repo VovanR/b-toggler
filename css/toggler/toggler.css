@@ -4,49 +4,39 @@
  * default - is closed
  */
 
-.b-toggler {
-    &.b-toggler__toggler {
-        .b-toggler__text {
-            cursor: pointer;
-            user-select: none;
+.b-toggler__toggler {
+    .b-toggler__text {
+        cursor: pointer;
+        user-select: none;
 
+        &._name_opened {
+            display: none;
+        }
+    }
+
+    &._state_opened {
+        .b-toggler__text {
             &._name_opened {
+                display: inline;
+            }
+
+            &._name_closed {
                 display: none;
             }
         }
     }
+}
 
-    &.b-toggler__panel {
-        display: none;
-    }
-
-    &.b-toggler__dummy-panel {
-    }
-
-
-    /*
-     * Opened
-     */
+.b-toggler__panel {
+    display: none;
 
     &._state_opened {
-        &.b-toggler__toggler {
-            .b-toggler__text {
-                &._name_opened {
-                    display: inline;
-                }
+        display: block;
+    }
+}
 
-                &._name_closed {
-                    display: none;
-                }
-            }
-        }
-
-        &.b-toggler__panel {
-            display: block;
-        }
-
-        &.b-toggler__dummy-panel {
-            display: none;
-        }
+.b-toggler__dummy-panel {
+    &._state_opened {
+        display: none;
     }
 }
