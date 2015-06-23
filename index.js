@@ -37,6 +37,7 @@ define([
 
         this._$toggler = null;
         this._$panel = null;
+        this._$dummyPanel = null;
 
         this._init();
     };
@@ -52,6 +53,7 @@ define([
 
             this._$toggler = $('.b-toggler__toggler._name_' + this._name);
             this._$panel = $('.b-toggler__panel._name_' + this._name);
+            this._$dummyPanel = $('.b-toggler__dummy-panel._name_' + this._name);
 
             this._bindControls();
         },
@@ -76,6 +78,7 @@ define([
         _open: function () {
             this._$toggler.addClass(opennedClass);
             this._$panel.addClass(opennedClass);
+            this._$dummyPanel.addClass(opennedClass);
 
             if (this._closeOnBlur) {
                 $(document).on('click.dj-feedback', function (e) {
@@ -96,6 +99,7 @@ define([
         _close: function () {
             this._$toggler.removeClass(opennedClass);
             this._$panel.removeClass(opennedClass);
+            this._$dummyPanel.removeClass(opennedClass);
 
             if (this._closeOnBlur) {
                 $(document).off('click.dj-feedback');

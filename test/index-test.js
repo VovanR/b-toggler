@@ -44,6 +44,9 @@ requirejs([
                 assert.ok(m._$toggler.find('.b-toggler__text._name_opened').is(':visible'));
                 assert.notOk(m._$toggler.find('.b-toggler__text._name_closed').is(':visible'));
                 assert.ok(m._$panel.is(':visible'));
+                if (m._$dummyPanel.length) {
+                    assert.notOk(m._$dummyPanel.is(':visible'));
+                }
             },
             /**
              */
@@ -51,6 +54,9 @@ requirejs([
                 assert.notOk(m._$toggler.find('.b-toggler__text._name_opened').is(':visible'));
                 assert.ok(m._$toggler.find('.b-toggler__text._name_closed').is(':visible'));
                 assert.notOk(m._$panel.is(':visible'));
+                if (m._$dummyPanel.length) {
+                    assert.ok(m._$dummyPanel.is(':visible'));
+                }
             },
         };
 
@@ -68,6 +74,11 @@ requirejs([
             it('should have panel block', function () {
                 var m = module();
                 assert.ok(m._$panel.length);
+            });
+
+            it('should have dummy panel if defined', function () {
+                var m = module();
+                assert.ok(m._$dummyPanel.length);
             });
 
             it('should throw if no options', function () {

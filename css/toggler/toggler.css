@@ -20,6 +20,9 @@
         display: none;
     }
 
+    &.b-toggler__dummy-panel {
+    }
+
 
     /*
      * Opened
@@ -40,6 +43,10 @@
 
         &.b-toggler__panel {
             display: block;
+        }
+
+        &.b-toggler__dummy-panel {
+            display: none;
         }
     }
 }
