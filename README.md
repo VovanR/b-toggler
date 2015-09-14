@@ -6,6 +6,8 @@
 
 > Toggler for any content. RequireJS module ([Demo](https://jsfiddle.net/VovanR/39qee4ax/))
 
+![](preview/example.gif)
+
 ## Usage
 
 ```html
@@ -28,8 +30,6 @@ var toggler = new Toggler({
     name: 'test',
 });
 ```
-
-![](preview/example.gif)
 
 ## Development
 
