@@ -14,11 +14,11 @@ requirejs([
 
     'use strict';
 
-    mocha.setup('bdd');
     var assert = chai.assert;
 
     describe('Toggler', function () {
         /**
+         * @param {Object} o
          */
         var module = function (o) {
             o = o || {};
@@ -39,6 +39,8 @@ requirejs([
 
         var test = {
             /**
+             * @param {Toggler} m
+             * @public
              */
             isActive: function (m) {
                 assert.ok(m._$toggler.find('.b-toggler__text._name_opened').is(':visible'));
@@ -49,6 +51,8 @@ requirejs([
                 }
             },
             /**
+             * @param {Toggler} m
+             * @public
              */
             isInactive: function (m) {
                 assert.notOk(m._$toggler.find('.b-toggler__text._name_opened').is(':visible'));
@@ -236,6 +240,7 @@ requirejs([
                     var isFired = false;
                     var m = module({
                         /**
+                         * @public
                          */
                         onOpen: function () {
                             isFired = true;
@@ -252,6 +257,7 @@ requirejs([
                     var isFired = false;
                     var m = module({
                         /**
+                         * @public
                          */
                         onClose: function () {
                             isFired = true;
@@ -265,10 +271,6 @@ requirejs([
         });
     });
 
-    if (window.mochaPhantomJS) {
-        mochaPhantomJS.run();
-    } else {
-        mocha.run();
-    }
+    mocha.run();
 
 });
